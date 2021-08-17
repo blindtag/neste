@@ -21,7 +21,7 @@ export class ProductsService{
     async getProduct(productId:string){
         const product = await this.findProduct(productId)
         const jul = {id:product.id, title:product.title, description:product.description, price: product.price}
-        console.log(jul)
+    
         return jul
     }
     async updateProduct(productId:string, title:string, desc:string, price:number){
@@ -39,10 +39,10 @@ export class ProductsService{
         let product 
         try {
             const product = await this.productModel.findById(id)
+            return product
         } catch (error) {
             throw new NotFoundException('Could not find product.')
         }
-        return product
         
         // const productIndex = this.products.findIndex(prod => prod.id === id)
         // const product = this.products[productIndex]
