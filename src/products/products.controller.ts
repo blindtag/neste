@@ -8,21 +8,21 @@ export class ProductsController{
 
     }
     @Post()
-    addProduct(
+    async addProduct(
     @Body('title') prodTitle:string, 
     @Body('description') prodDesc:string,
     @Body('price') prodPrice: number 
     ){
-       const generatedId = this.productsService.insertProduct(prodTitle, prodDesc, prodPrice)
+       const generatedId = await this.productsService.insertProduct(prodTitle, prodDesc, prodPrice)
        return {id: generatedId}
     }
     @Get()
-    getAllProducts(){
-        return this.productsService.getProducts()
+    async getAllProducts(){
+        return await this.productsService.getProducts()
     }
     @Get(':id')
-    getProduct(@Param('id') productId:string){
-        return this.productsService.getProduct(productId)
+    async getProduct(@Param('id') productId:string){
+        return await this.productsService.getProduct(productId)
     }
     @Patch(':id')
     updateProduct(
