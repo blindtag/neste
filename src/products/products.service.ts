@@ -32,7 +32,13 @@ export class ProductsService{
         
     }
     private async findProduct(id:string): Promise<Product>{
-        const product = await this.productModel.findById(id)
+        let product
+        try {
+            const product = await this.productModel.findById(id)
+            
+        } catch (error) {
+            throw new NotFoundException('Could not find product.')
+        }
         if(!product){
             throw new NotFoundException('Could not find product.')
         }
